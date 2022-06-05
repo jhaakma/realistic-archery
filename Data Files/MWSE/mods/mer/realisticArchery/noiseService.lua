@@ -57,19 +57,21 @@ NoiseService.getMaxNoiseForMobile = function(firingMobile)
     local maxNoise = config.mcm.maxNoise
         * getAttackTerm(firingMobile)
         * getSneakingTerm(firingMobile)
+    maxNoise = math.max(maxNoise, 0)
     logger:debug("getMaxNoiseForMobile: %s", maxNoise)
     return maxNoise
 end
+
+
 
 --Generate a random amount of projectile noise based on the stats of the attacking mobile
 ---@return tes3matrix33 noise The noise vector applied to the projectile's velocity direction.
 NoiseService.getNoise = function(firingMobile)
     logger:debug("Getting noise for mobile: %s", firingMobile.object.name)
     local maxNoise = NoiseService.getMaxNoiseForMobile(firingMobile)
-    local halfMaxNoise = maxNoise / 2
-    local xNoise = math.random(-halfMaxNoise, halfMaxNoise)
-    local yNoise = math.random(-halfMaxNoise, halfMaxNoise)
-    local zNoise = math.random(-halfMaxNoise, halfMaxNoise)
+    local xNoise = util.getNormalDistributionRandom(maxNoise)
+    local yNoise = util.getNormalDistributionRandom(maxNoise)
+    local zNoise = util.getNormalDistributionRandom(maxNoise)
     local noise = tes3matrix33.new()
     noise:fromEulerXYZ(
         math.sin(2 * math.pi * xNoise / 360 ),

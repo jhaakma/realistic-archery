@@ -59,7 +59,7 @@ local function registerMCM()
     }
 
     page:createSlider{
-        label = "Max Degrees of Noise: %s%%",
+        label = "Max Noise: %s Degrees",
         description = "Determines many degrees a projectile can be off by, scaled to the firing NPC/player's Marksman skill."
           .. string.format(" Default: %s%%", config.mcmDefault.maxNoise),
         variable = mwse.mcm.createTableVariable{ id = "maxNoise", table = mcmConfig },
@@ -71,7 +71,7 @@ local function registerMCM()
 
     page:createSlider{
         label = "Min Distance to Full Damage (at lowest Marksman Skill): %s",
-        description = "Determines the minimum distance a projectile must be before it does full damage. This distance is reduced by half at 100 Marksman skill."
+        description = "Determines the minimum distance a projectile must be before it does full damage. This distance is reduced by half at 100 Marksman skill"
             .. string.format(" Default: %s", config.mcmDefault.minDistanceFullDamage),
         variable = mwse.mcm.createTableVariable{ id = "minDistanceFullDamage", table = mcmConfig },
         min = 0,

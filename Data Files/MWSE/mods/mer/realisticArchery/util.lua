@@ -18,6 +18,7 @@ do --logger
         return logger
     end
 end
+local logger = Util.createLogger("Util")
 
 function Util.getVersion()
     local versionFile = io.open("Data Files/MWSE/mods/mer/realisticArchery/version.txt", "r")
@@ -42,5 +43,18 @@ function Util.getNPCOrCreatureMarksmanSkill(mobile)
         return marksmanSkill
     end
 end
+
+function Util.getNormalDistributionRandom(range)
+    logger:debug("getNormalDistributionRandom")
+    logger:debug("Range: %s", range)
+    local normalDistribution = math.sqrt(-2 * math.log(math.random())) * math.cos(2 * math.pi * math.random())
+    logger:debug("getNormalDistributionRandom: %s", normalDistribution)
+    normalDistribution = normalDistribution * range / 2
+    logger:debug("getNormalDistributionRandom*range: %s", normalDistribution)
+    return normalDistribution
+end
+
+
+
 
 return Util
